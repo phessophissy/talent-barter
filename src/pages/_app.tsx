@@ -2,7 +2,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import '../styles/theme.css';
 
-const FRAME_URL = 'https://talent-barter-3ax4mh4b6-phessophissys-projects.vercel.app';
+const FRAME_URL = 'https://talent-barter.vercel.app';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
