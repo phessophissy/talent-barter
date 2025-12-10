@@ -12,8 +12,8 @@
     "imageUrl": "https://talent-barter.vercel.app/og-image.svg",
     "splashImageUrl": "https://talent-barter.vercel.app/splash.svg",
     "splashBackgroundColor": "#8B5CF6",
-    "subtitle": "Discover & connect with top Web3 builders",
-    "description": "Find verified Web3 talent using Talent Protocol. Search builders by location, skills, and builder score. Pay once with 1 cUSD on Celo for lifetime access to the full builder directory.",
+    "subtitle": "Find Top Web3 Builders",
+    "description": "Search verified Web3 talent by location, skills and builder score. Pay once with 1 cUSD on Celo for lifetime access to the full directory.",
     "primaryCategory": "utility",
     "heroImageUrl": "https://talent-barter.vercel.app/og-image.svg",
     "webhookUrl": "https://talent-barter.vercel.app/api/webhook"
