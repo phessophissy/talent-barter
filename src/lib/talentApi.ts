@@ -33,25 +33,55 @@ export interface SearchParams {
 export async function searchBuilders(params: SearchParams): Promise<Builder[]> {
   try {
     // Build query params for Talent Protocol API v2
-    const cleanParams: Record<string, string> = { endpoint: 'passports' };
+    const queryParams: Record<string, string> = { endpoint: 'passports' };
     
-    // The API doesn't support these filters directly, so we'll filter client-side
-    // Just fetch passports and filter
-    const queryString = new URLSearchParams(cleanParams).toString();
-    const res = await fetch(`/api/talent?${queryString}`);
-    
-    if (!res.ok) {
-      const errorData = await res.json().catch(() => ({}));
-      throw new Error(errorData.error || `API error: ${res.status}`);
+    // Use API's keyword search for location or skills
+    // This searches across name, bio, location, and tags
+    if (params.location && params.location.trim()) {
+      queryParams.keyword = params.location.trim();
+    } else if (params.skills && params.skills.trim()) {
+      // If no location, search by skill
+      queryParams.keyword = params.skills.trim().split(',')[0].trim();
     }
     
-    const data = await res.json();
+    // Fetch multiple pages to get more results
+    const pagesToFetch = 5; // Fetch 5 pages (125 builders max)
+    let allPassports: any[] = [];
     
-    // Handle the passports response structure
-    const passports = data.passports || [];
+    for (let page = 1; page <= pagesToFetch; page++) {
+      const pageParams = { ...queryParams, page: String(page) };
+      const queryString = new URLSearchParams(pageParams).toString();
+      const res = await fetch(`/api/talent?${queryString}`);
+      
+      if (!res.ok) {
+        if (page === 1) {
+          const errorData = await res.json().catch(() => ({}));
+          throw new Error(errorData.error || `API error: ${res.status}`);
+        }
+        break; // Stop if subsequent pages fail
+      }
+      
+      const data = await res.json();
+      const passports = data.passports || [];
+      
+      if (passports.length === 0) break; // No more results
+      
+      allPassports = allPassports.concat(passports);
+      
+      // If we got less than expected, we've hit the last page
+      if (passports.length < 25) break;
+    }
     
     // Map all results first
-    let builders: Builder[] = passports.map((p: any) => normalizeBuilder(p));
+    let builders: Builder[] = allPassports.map((p: any) => normalizeBuilder(p));
+    
+    // Remove duplicates by passport_id
+    const seen = new Set<number>();
+    builders = builders.filter(b => {
+      if (seen.has(b.passport_id)) return false;
+      seen.add(b.passport_id);
+      return true;
+    });
     
     // Check which filters are applied
     const hasLocationFilter = params.location && params.location.trim();
@@ -67,12 +97,18 @@ export async function searchBuilders(params: SearchParams): Promise<Builder[]> {
     
     // Apply ALL filters as AND conditions (each filter narrows down results)
     
-    // Filter by LOCATION (if specified)
+    // Filter by LOCATION (if specified) - more flexible matching
     if (hasLocationFilter) {
-      const loc = params.location!.toLowerCase();
-      builders = builders.filter((b: Builder) => 
-        b.location?.toLowerCase().includes(loc)
-      );
+      const loc = params.location!.toLowerCase().trim();
+      builders = builders.filter((b: Builder) => {
+        // Check location field
+        if (b.location?.toLowerCase().includes(loc)) return true;
+        // Also check bio for location mentions
+        if (b.bio?.toLowerCase().includes(loc)) return true;
+        // Check if name contains location (e.g., "Lagos" in display name)
+        if (b.display_name?.toLowerCase().includes(loc)) return true;
+        return false;
+      });
     }
     
     // Filter by MIN SCORE (if specified)
@@ -82,7 +118,7 @@ export async function searchBuilders(params: SearchParams): Promise<Builder[]> {
     
     // Filter by SKILLS (if specified) - checks tags, skills array, and bio
     if (hasSkillsFilter) {
-      const skillSearch = params.skills!.toLowerCase().split(',').map(s => s.trim());
+      const skillSearch = params.skills!.toLowerCase().split(',').map(s => s.trim()).filter(s => s);
       builders = builders.filter((b: Builder) => {
         const hasMatchingTag = b.tags.some(tag => 
           skillSearch.some(s => tag.toLowerCase().includes(s))
@@ -98,7 +134,7 @@ export async function searchBuilders(params: SearchParams): Promise<Builder[]> {
     
     // Filter by ACTIVITY TYPE (if specified) - checks tags and bio
     if (hasActivityFilter) {
-      const activitySearch = params.activity!.toLowerCase().split(',').map(s => s.trim());
+      const activitySearch = params.activity!.toLowerCase().split(',').map(s => s.trim()).filter(s => s);
       builders = builders.filter((b: Builder) => {
         const hasMatchingTag = b.tags.some(tag => 
           activitySearch.some(s => tag.toLowerCase().includes(s))
