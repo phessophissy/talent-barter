@@ -1,0 +1,98 @@
+/* Skeleton shimmer effect */
+.skeleton-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #444 25%, #666 50%, #444 75%);
+  animation: shimmer 1.2s infinite linear;
+  margin-bottom: 12px;
+}
+.skeleton-line {
+  height: 16px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #444 25%, #666 50%, #444 75%);
+  animation: shimmer 1.2s infinite linear;
+}
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+/* Metallic color theme for Talent-Barter */
+/* Sleek metallic theme with gradients and glassmorphism */
+:root {
+  --metal-bg: linear-gradient(135deg, #23272a 0%, #3a3f44 100%);
+  --metal-surface: rgba(58, 63, 68, 0.85);
+  --metal-accent: #b8b8b8;
+  --metal-gold: #ffd700;
+  --metal-silver: #c0c0c0;
+  --metal-copper: #b87333;
+  --metal-text: #e0e0e0;
+  --metal-border: #6c6c6c;
+  --metal-glass: rgba(255,255,255,0.08);
+  --metal-shadow: 0 4px 24px 0 rgba(0,0,0,0.18);
+}
+
+body {
+  background: var(--metal-bg);
+  color: var(--metal-text);
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button, input {
+  background: var(--metal-surface);
+  color: var(--metal-text);
+  border: 1px solid var(--metal-border);
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 6px;
+  font-size: 1rem;
+  box-shadow: var(--metal-shadow);
+  transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+  outline: none;
+}
+
+button:hover {
+  box-shadow: 0 0 16px var(--metal-gold);
+  border-color: var(--metal-gold);
+  background: linear-gradient(90deg, var(--metal-gold) 0%, var(--metal-surface) 100%);
+  color: #23272a;
+}
+
+.card {
+  background: var(--metal-glass);
+  border: 1px solid var(--metal-border);
+  border-radius: 18px;
+  padding: 24px 20px;
+  margin: 18px 0;
+  box-shadow: var(--metal-shadow);
+  backdrop-filter: blur(8px);
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+}
+.card:hover {
+  box-shadow: 0 8px 32px var(--metal-gold);
+  border-color: var(--metal-gold);
+  transform: translateY(-4px) scale(1.02);
+}
+button:active {
+  transform: scale(0.97);
+}
+
+h2, h3 {
+  color: var(--metal-gold);
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+a {
+  color: var(--metal-copper);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover {
+  color: var(--metal-gold);
+}

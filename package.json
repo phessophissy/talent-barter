@@ -1,0 +1,22 @@
+{
+  "name": "talent-barter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Minimal Farcaster MiniApp MVP for Talent Discovery – Verified Builder Marketplace",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "ethers": "^6.16.0",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.2",
+    "@types/react": "19.2.7",
+    "typescript": "5.9.3"
+  }
+}
