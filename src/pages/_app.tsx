@@ -12,24 +12,21 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="description" content="Discover and connect with top Web3 builders on Farcaster" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         
-        {/* Farcaster Frame Meta Tags */}
-        <meta property="fc:frame" content="vNext" />
-        <meta property="fc:frame:image" content={`${FRAME_URL}/og-image.png`} />
-        <meta property="fc:frame:button:1" content="Find Talent" />
-        <meta property="fc:frame:button:1:action" content="launch_frame" />
-        <meta property="fc:frame:button:1:target" content={FRAME_URL} />
+        {/* Farcaster Frame Embed Meta Tags */}
+        <meta name="fc:frame" content='{"version":"next","imageUrl":"https://talent-barter.vercel.app/og-image.svg","button":{"title":"Find Talent","action":{"type":"launch_frame","name":"Talent Barter","url":"https://talent-barter.vercel.app","splashImageUrl":"https://talent-barter.vercel.app/splash.svg","splashBackgroundColor":"#8B5CF6"}}}' />
         
         {/* Open Graph */}
         <meta property="og:title" content="Talent Barter - Find Web3 Builders" />
         <meta property="og:description" content="Discover and connect with top Web3 builders. Pay once with cUSD for lifetime access." />
-        <meta property="og:image" content={`${FRAME_URL}/og-image.png`} />
+        <meta property="og:image" content={`${FRAME_URL}/og-image.svg`} />
         <meta property="og:url" content={FRAME_URL} />
+        <meta property="og:type" content="website" />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Talent Barter - Find Web3 Builders" />
         <meta name="twitter:description" content="Discover and connect with top Web3 builders on Farcaster" />
-        <meta name="twitter:image" content={`${FRAME_URL}/og-image.png`} />
+        <meta name="twitter:image" content={`${FRAME_URL}/og-image.svg`} />
       </Head>
       <Component {...pageProps} />
     </>
