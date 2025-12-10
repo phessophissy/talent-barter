@@ -1,8 +1,8 @@
 {
   "accountAssociation": {
-    "header": "eyJmaWQiOjAsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIn0",
-    "payload": "eyJkb21haW4iOiJ0YWxlbnQtYmFydGVyLnZlcmNlbC5hcHAifQ",
-    "signature": "MHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDA"
+    "header": "eyJmaWQiOjQ3Mjc4MCwidHlwZSI6ImF1dGgiLCJrZXkiOiIweDJEYTg1ODFEZDhiQjY2NjZDQTZCZEQ1RmFjNTdkZTVBQkRGNTE1QzYifQ",
+    "payload": "eyJkb21haW4iOiJodHRwczovL3RhbGVudC1iYXJ0ZXIudmVyY2VsLmFwcCJ9",
+    "signature": "5iB3ybYmpEDTIZj/A6NKDPmv0wVDBna7q13DoaRONdB9MiWW5Z4L+cTK6VQQhwlABH3AHrhesdywuYBBoh7R4xw="
   },
   "frame": {
     "version": "1",
@@ -10,9 +10,12 @@
     "iconUrl": "https://talent-barter.vercel.app/icon.svg",
     "homeUrl": "https://talent-barter.vercel.app",
     "imageUrl": "https://talent-barter.vercel.app/og-image.svg",
-    "buttonTitle": "Find Talent",
     "splashImageUrl": "https://talent-barter.vercel.app/splash.svg",
     "splashBackgroundColor": "#8B5CF6",
+    "subtitle": "Discover & connect with top Web3 builders",
+    "description": "Find verified Web3 talent using Talent Protocol. Search builders by location, skills, and builder score. Pay once with 1 cUSD on Celo for lifetime access to the full builder directory.",
+    "primaryCategory": "utility",
+    "heroImageUrl": "https://talent-barter.vercel.app/og-image.svg",
     "webhookUrl": "https://talent-barter.vercel.app/api/webhook"
   }
 }
